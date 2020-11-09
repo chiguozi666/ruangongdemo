@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace是命名空间，是mapper接口的全路径-->
+<!--String oppenid;
+    String sessionkey;
+    String unionid;
+    String u_name;
+    String  u_studentnum;
+    String u_identify;
+    String u_credit;
+    int u_phone;
+-->
+<mapper namespace="com.mingyuan.bangbang.mapper.UserMapper">
+    <insert id="insertUserInfo">
+        insert into user_info(openid, sessionkey, unionid, u_name, u_studentnum, u_identify, u_credit, u_phone)
+        values(#{oppenid},#{sessionkey},#{unionid},#{uName},#{uStudentnum},#{uIdentify},#{uCredit},#{uPhone})
+    </insert>
+    <update id="updateUser" parameterType="com.mingyuan.bangbang.pojo.UserInfo">
+        update user_info set
+        <if test="userInfo.openid != null">
+            openid=#{userInfo.openid},
+        </if>
+        <if test="userInfo.sessionkey != null">
+            sessionkey=#{userInfo.sessionkey},
+        </if>
+        <if test="userInfo.uName != null">
+            u_name=#{userInfo.uName},
+        </if>
+        <if test="userInfo.uStudentnum!=null">
+            u_studentnum=#{userInfo.uStudentnum},
+        </if>
+        <if test="userInfo.uIdentify!=null">
+            u_identify=#{userInfo.uIdentify},
+        </if>
+        <if test="userInfo.uCredit!=null">
+            u_credit=#{userInfo.uCredit},
+        </if>
+        <if test="userInfo.uPhone!=null">
+            u_credit =#{userInfo.uPhone},
+        </if>
+        unionid=#{userInfo.unionid}
+        where unionid=#{userInfo.unionid};
+    </update>
+    <delete id="deleteUser">
+        delete from user_info where unionid = #{0};
+    </delete>
+    <!--sql – 可被其他语句引用的可重用语句块-->
+
+    <select id="getUserInfos" resultType="com.mingyuan.bangbang.pojo.UserInfo">
+        SELECT * FROM user_info;
+    </select>
+    <select id="getUserInfo" resultType="com.mingyuan.bangbang.pojo.UserInfo"></select>
+</mapper>

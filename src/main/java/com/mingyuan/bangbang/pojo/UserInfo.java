@@ -1,21 +1,21 @@
 package com.mingyuan.bangbang.pojo;
 
 public class UserInfo {
-    String oppenid;
+    String openid;
     String sessionkey;
     String unionid;
-    String u_name;
-    int  u_studentnum;
-    String u_identify;
-    String u_credit;
-    int u_phone;
+    String uName;
+    String uStudentnum;
+    String uIdentify;
+    int uCredit;
+    int uPhone;
 
-    public String getOppenid() {
-        return oppenid;
+    public String getOpenid() {
+        return openid;
     }
 
-    public void setOppenid(String oppenid) {
-        this.oppenid = oppenid;
+    public void setOpenid(String openid) {
+        this.openid = openid;
     }
 
     public String getSessionkey() {
@@ -34,43 +34,57 @@ public class UserInfo {
         this.unionid = unionid;
     }
 
-    public String getU_name() {
-        return u_name;
+    public String getuName() {
+        return uName;
     }
 
-    public void setU_name(String u_name) {
-        this.u_name = u_name;
+    public void setuName(String uName) {
+        this.uName = uName;
     }
 
-    public int getU_studentnum() {
-        return u_studentnum;
+    public String getuStudentnum() {
+        return uStudentnum;
     }
 
-    public void setU_studentnum(int u_studentnum) {
-        this.u_studentnum = u_studentnum;
+    public void setuStudentnum(String uStudentnum) {
+        this.uStudentnum = uStudentnum;
     }
 
-    public String getU_identify() {
-        return u_identify;
+    public String getuIdentify() {
+        return uIdentify;
     }
 
-    public void setU_identify(String u_identify) {
-        this.u_identify = u_identify;
+    public void setuIdentify(String uIdentify) {
+        this.uIdentify = uIdentify;
     }
 
-    public String getU_credit() {
-        return u_credit;
+    public int getuCredit() {
+        return uCredit;
     }
 
-    public void setU_credit(String u_credit) {
-        this.u_credit = u_credit;
+    public void setuCredit(int uCredit) {
+        this.uCredit = uCredit;
     }
 
-    public int getU_phone() {
-        return u_phone;
+    public int getuPhone() {
+        return uPhone;
     }
 
-    public void setU_phone(int u_phone) {
-        this.u_phone = u_phone;
+    public void setuPhone(int uPhone) {
+        this.uPhone = uPhone;
+    }
+
+    @Override
+    public String toString() {
+        return "UserInfo{" +
+                "oppenid='" + openid + '\'' +
+                ", sessionkey='" + sessionkey + '\'' +
+                ", unionid='" + unionid + '\'' +
+                ", u_name='" + uName + '\'' +
+                ", u_studentnum='" + uStudentnum + '\'' +
+                ", u_identify='" + uIdentify + '\'' +
+                ", u_credit='" + uCredit + '\'' +
+                ", u_phone=" + uPhone +
+                '}';
     }
 }
