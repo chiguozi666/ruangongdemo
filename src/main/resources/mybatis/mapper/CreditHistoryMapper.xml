@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<mapper namespace="com.mingyuan.bangbang.mapper.CreditHistory">
+<mapper namespace="com.mingyuan.bangbang.mapper.CreditHistoryMapper">
     <insert id="insertCreditHistory">
-        insert into credit_history(o_id, ch_credit_change, ch_reason, ch_id, ch_time, unionid)
+        insert into credit_history(o_id,ch_credit_change, ch_reason, ch_id, ch_time, unionid)
         values(#{oId},#{chCreditChange},#{chReason},#{chId},#{chTime},#{unionid})
     </insert>
     <update id="updateCreditHistory">
@@ -31,10 +31,13 @@
         SELECT * FROM credit_history where unionid = #{unionid}
     </delete>
 
-    <select id="getCreditHistoriesByUnionid" resultType="com.mingyuan.bangbang.mapper.CreditHistory">
+    <select id="getCreditHistoriesByUnionid" resultType="com.mingyuan.bangbang.pojo.CreditHistory">
         SELECT * FROM credit_history where unionid = #{unionid}
     </select>
-    <select id="getCreditHistory" resultType="com.mingyuan.bangbang.mapper.CreditHistory">
+    <select id="getCreditHistory" resultType="com.mingyuan.bangbang.pojo.CreditHistory">
         SELECT * FROM credit_history where ch_id = #{chId}
+    </select>
+    <select id="getCreditHistories" resultType="com.mingyuan.bangbang.pojo.CreditHistory">
+        SELECT * FROM credit_history;
     </select>
 </mapper>
