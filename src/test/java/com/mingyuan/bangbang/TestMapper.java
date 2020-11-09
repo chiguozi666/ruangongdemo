@@ -1,8 +1,9 @@
 package com.mingyuan.bangbang;
 
+import com.mingyuan.bangbang.mapper.CreditHistoryMapper;
 import com.mingyuan.bangbang.mapper.OrderMapper;
+import com.mingyuan.bangbang.pojo.CreditHistory;
 import com.mingyuan.bangbang.pojo.OrderInfo;
-import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -17,6 +18,8 @@ import javax.annotation.Resource;
 public class TestMapper {
     @Resource
     OrderMapper orderMapper;
+    @Resource
+    CreditHistoryMapper creditHistoryMapper;
 
     @Test
     public void testInsert(){
@@ -40,5 +43,14 @@ public class TestMapper {
     @Test
     public void testSelete(){
         System.out.println(orderMapper.getOrderInfos());
+    }
+
+    @Test
+    public void testCreditHistory(){
+        CreditHistory creditHistory = CreditHistory.getTestInstance();
+        creditHistory.setChId(1);
+        creditHistory.setChReason("嘻嘻嘻");
+        creditHistoryMapper.updateCreditHistory(creditHistory);
+        System.out.println(creditHistoryMapper.getCreditHistories());
     }
 }

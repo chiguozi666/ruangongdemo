@@ -4,18 +4,19 @@ import java.sql.Time;
 
 public class CreditHistory {
 
-    int o_id;
+    int oId;
     int chCreditChange;
     String chReason;
     int chId;
     Time chTime;
     String unionid;
-    public int getO_id() {
-        return o_id;
+    public CreditHistory(){}
+    public int getoId() {
+        return oId;
     }
 
-    public void setO_id(int o_id) {
-        this.o_id = o_id;
+    public void setoId(int oId) {
+        this.oId = oId;
     }
 
     public int getChCreditChange() {
@@ -56,5 +57,24 @@ public class CreditHistory {
 
     public void setUnionid(String unionid) {
         this.unionid = unionid;
+    }
+
+
+    public CreditHistory(int o_id, int chCreditChange, String chReason, int chId, Time chTime, String unionid) {
+        this.oId = o_id;
+        this.chCreditChange = chCreditChange;
+        this.chReason = chReason;
+        this.chId = chId;
+        this.chTime = chTime;
+        this.unionid = unionid;
+    }
+    public static CreditHistory getTestInstance(){
+        CreditHistory creditHistory = new CreditHistory();
+        creditHistory.setUnionid("unionid");
+        creditHistory.setoId(1344);
+        creditHistory.setChCreditChange(-10);
+        creditHistory.setChReason("我是原因");
+        creditHistory.setChTime(new Time(System.currentTimeMillis()));
+        return creditHistory;
     }
 }
