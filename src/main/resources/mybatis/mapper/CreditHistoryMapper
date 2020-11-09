@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.mingyuan.bangbang.mapper.CreditHistory">
+    <insert id="insertCreditHistory">
+        insert into credit_history(o_id, ch_credit_change, ch_reason, ch_id, ch_time, unionid)
+        values(#{oId},#{chCreditChange},#{chReason},#{chId},#{chTime},#{unionid})
+    </insert>
+    <update id="updateCreditHistory">
+        update credit_history set
+        <if test="creditHistory.oId!= null">
+            o_id=#{creditHistory.oId},
+        </if>
+        <if test="creditHistory.chCreditChange!= null">
+            ch_credit_change=#{creditHistory.chCreditChange},
+        </if>
+        <if test="creditHistory.chReason!= null">
+            ch_reason=#{creditHistory.chReason},
+        </if>
+        <if test="creditHistory.chTime!= null">
+            ch_time=#{creditHistory.chTime},
+        </if>
+        <if test="creditHistory.unionid!= null">
+            unionid=#{creditHistory.unionid},
+        </if>
+        ch_id=#{creditHistory.chId}
+        where ch_id=#{creditHistory.chId};
+    </update>
+    <delete id="deleteCreditHistory">
+        SELECT * FROM credit_history where unionid = #{unionid}
+    </delete>
+
+    <select id="getCreditHistoriesByUnionid" resultType="com.mingyuan.bangbang.mapper.CreditHistory">
+        SELECT * FROM credit_history where unionid = #{unionid}
+    </select>
+    <select id="getCreditHistory" resultType="com.mingyuan.bangbang.mapper.CreditHistory">
+        SELECT * FROM credit_history where ch_id = #{chId}
+    </select>
+</mapper>
