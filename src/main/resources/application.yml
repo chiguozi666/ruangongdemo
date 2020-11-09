@@ -4,7 +4,7 @@ spring:
     username: root
     password: '!Chiguozi666'
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://8.129.180.36:3306/bangbang
+    url: jdbc:mysql://8.129.180.36:3306/bangbang?characterEncoding=utf8
     type: com.alibaba.druid.pool.DruidDataSource
     #   数据源其他配置
     initialSize: 5
@@ -33,3 +33,6 @@ mybatis:
   config-location: classpath:mybatis/mybatis-config.xml
   # 指定sql映射文件位置
   mapper-locations: classpath:mybatis/mapper/*.xml
+wx:
+  appid: wxb5b61ffbb9f4081f
+  appsecret: 825881f52f16a4c626b304670ee79330

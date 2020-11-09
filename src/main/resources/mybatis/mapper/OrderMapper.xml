@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mingyuan.bangbang.mapper.OrderMapper">
+    <insert id="insertOrderInfo">
+        insert into order_info(o_id, publish_userid, receive_userid, o_title, o_content, o_photourl, o_money,o_endtime,o_fintime,o_requiretime,locate)
+        values(#{oId},#{publishUserid},#{receiveUserid},#{oTitle},#{oContent},#{oPhotourl},#{oMoney},#{oEndtime},#{oFintime},#{oRequiretime},#{locate})
+    </insert>
+    <update id="updateOrder">
+        update order_info set
+        <if test="orderInfo.publishUserid != null">
+            publish_userid=#{orderInfo.publishUserid},
+        </if>
+        <if test="orderInfo.receiveUserid != null">
+            receive_userid=#{orderInfo.receiveUserid},
+        </if>
+        <if test="orderInfo.oTitle != null">
+            o_title=#{orderInfo.oTitle},
+        </if>
+        <if test="orderInfo.oContent!=null">
+           o_content=#{orderInfo.oContent},
+        </if>
+        <if test="orderInfo.oPhotourl!=null">
+            o_photourl=#{orderInfo.oPhotourl},
+        </if>
+        <if test="orderInfo.oMoney!=null">
+            o_Money=#{orderInfo.oMoney},
+        </if>
+        <if test="orderInfo.oEndtime!=null">
+            o_Endtime =#{orderInfo.oEndtime},
+        </if>
+        <if test="orderInfo.oFintime!=null">
+            o_Fintime =#{orderInfo.oFintime},
+        </if>
+        <if test="orderInfo.oRequiretime!=null">
+            o_Requiretime =#{orderInfo.oRequiretime},
+         </if>
+        <if test="orderInfo.locate!=null">
+            locate =#{orderInfo.locate},
+        </if>
+        o_id=#{orderInfo.oId}
+        where o_id=#{orderInfo.oId};
+    </update>
+    <delete id="deleteOrder">
+        delete from order_info where o_id = #{oId};
+    </delete>
+
+    <select id="getOrderInfos" resultType="com.mingyuan.bangbang.pojo.OrderInfo">
+        SELECT * FROM order_info;
+    </select>
+    <select id="getOrderInfo" resultType="com.mingyuan.bangbang.pojo.OrderInfo">
+        SELECT * FROM order_info where o_id = #{oId}
+    </select>
+</mapper>

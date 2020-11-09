@@ -4,96 +4,125 @@ import java.math.BigDecimal;
 import java.sql.Time;
 
 public class OrderInfo {
-    int o_id;
-    String publish_userid;
-    String receive_userid;
-    String o_title;
-    String o_content;
-    String o_photourl;
-    BigDecimal o_money;
-    Time o_endtime;
-    Time o_fintime;
-    Time o_requiretime;
-    String locate;
+    private int oId;
+    private String publishUserid;
+    private String receiveUserid;
+    private String oTitle;
+    private String oContent;
+    private String oPhotourl;
+    private BigDecimal oMoney;
+    private Time oEndtime;
+    private Time oFintime;
+    private Time oRequiretime;
+    private String locate;
+    public static OrderInfo getTestInstance(){
+        OrderInfo orderInfo = new OrderInfo();
+        orderInfo.setPublishUserid("发送者id");
+        orderInfo.setReceiveUserid("接收者id");
+        orderInfo.setoTitle("我是标题");
+        orderInfo.setoContent("我是内容");
+        orderInfo.setoPhotourl("www.xxxx.com");
+        orderInfo.setoMoney(new BigDecimal(5.20));
+        orderInfo.setoEndtime(new Time(System.currentTimeMillis()));
+        orderInfo.setoFintime(new Time(System.currentTimeMillis()));
+        orderInfo.setoRequiretime(new Time(System.currentTimeMillis()));
+        orderInfo.setLocate("二饭");
+        return orderInfo;
+    }
+    public OrderInfo(){}
 
-    public int getO_id() {
-        return o_id;
+    public OrderInfo(int oId, String publishUserid, String receiveUserid, String oTitle, String oContent, String oPhotourl, BigDecimal oMoney, Time oEndtime, Time oFintime, Time oRequiretime, String locate) {
+        this.oId = oId;
+        this.publishUserid = publishUserid;
+        this.receiveUserid = receiveUserid;
+        this.oTitle = oTitle;
+        this.oContent = oContent;
+        this.oPhotourl = oPhotourl;
+        this.oMoney = oMoney;
+        this.oEndtime = oEndtime;
+        this.oFintime = oFintime;
+        this.oRequiretime = oRequiretime;
+        this.locate = locate;
     }
 
-    public void setO_id(int o_id) {
-        this.o_id = o_id;
+    public int getoId() {
+        return oId;
     }
 
-    public String getPublish_userid() {
-        return publish_userid;
+    public void setoId(int oId) {
+        this.oId = oId;
     }
 
-    public void setPublish_userid(String publish_userid) {
-        this.publish_userid = publish_userid;
+    public String getPublishUserid() {
+        return publishUserid;
     }
 
-    public String getReceive_userid() {
-        return receive_userid;
+    public void setPublishUserid(String publishUserid) {
+        this.publishUserid = publishUserid;
     }
 
-    public void setReceive_userid(String receive_userid) {
-        this.receive_userid = receive_userid;
+    public String getReceiveUserid() {
+        return receiveUserid;
     }
 
-    public String getO_title() {
-        return o_title;
+    public void setReceiveUserid(String receiveUserid) {
+        this.receiveUserid = receiveUserid;
     }
 
-    public void setO_title(String o_title) {
-        this.o_title = o_title;
+    public String getoTitle() {
+        return oTitle;
     }
 
-    public String getO_content() {
-        return o_content;
+    public void setoTitle(String oTitle) {
+        this.oTitle = oTitle;
     }
 
-    public void setO_content(String o_content) {
-        this.o_content = o_content;
+    public String getoContent() {
+        return oContent;
     }
 
-    public String getO_photourl() {
-        return o_photourl;
+    public void setoContent(String oContent) {
+        this.oContent = oContent;
     }
 
-    public void setO_photourl(String o_photourl) {
-        this.o_photourl = o_photourl;
+    public String getoPhotourl() {
+        return oPhotourl;
     }
 
-    public BigDecimal getO_money() {
-        return o_money;
+    public void setoPhotourl(String oPhotourl) {
+        this.oPhotourl = oPhotourl;
     }
 
-    public void setO_money(BigDecimal o_money) {
-        this.o_money = o_money;
+    public BigDecimal getoMoney() {
+        return oMoney;
     }
 
-    public Time getO_endtime() {
-        return o_endtime;
+    public void setoMoney(BigDecimal oMoney) {
+        this.oMoney = oMoney;
     }
 
-    public void setO_endtime(Time o_endtime) {
-        this.o_endtime = o_endtime;
+    public Time getoEndtime() {
+        return oEndtime;
     }
 
-    public Time getO_fintime() {
-        return o_fintime;
+    public void setoEndtime(Time oEndtime) {
+        this.oEndtime = oEndtime;
     }
 
-    public void setO_fintime(Time o_fintime) {
-        this.o_fintime = o_fintime;
+    public Time getoFintime() {
+        return oFintime;
     }
 
-    public Time getO_requiretime() {
-        return o_requiretime;
+    public void setoFintime(Time oFintime) {
+        this.oFintime = oFintime;
     }
 
-    public void setO_requiretime(Time o_requiretime) {
-        this.o_requiretime = o_requiretime;
+    public Time getoRequiretime() {
+        return oRequiretime;
+    }
+
+    public void setoRequiretime(Time oRequiretime) {
+        this.oRequiretime = oRequiretime;
     }
 
     public String getLocate() {
@@ -102,5 +131,22 @@ public class OrderInfo {
 
     public void setLocate(String locate) {
         this.locate = locate;
+    }
+
+    @Override
+    public String toString() {
+        return "OrderInfo{" +
+                "oId=" + oId +
+                ", publishUserid='" + publishUserid + '\'' +
+                ", receiveUserid='" + receiveUserid + '\'' +
+                ", oTitle='" + oTitle + '\'' +
+                ", oContent='" + oContent + '\'' +
+                ", oPhotourl='" + oPhotourl + '\'' +
+                ", oMoney=" + oMoney +
+                ", oEndtime=" + oEndtime +
+                ", oFintime=" + oFintime +
+                ", oRequiretime=" + oRequiretime +
+                ", locate='" + locate + '\'' +
+                '}';
     }
 }

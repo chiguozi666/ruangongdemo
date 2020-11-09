@@ -7,9 +7,8 @@ import java.util.ArrayList;
 
 public interface UserMapper {
     public ArrayList<UserInfo> getUserInfos();
-    public UserInfo getUserInfo(String unionId);
+    public UserInfo getUserInfo(@Param("unionId") String unionId);
     public int updateUser(@Param("userInfo") UserInfo userInfo);
-
-    public void deleteUser(String unionId);
+    public void deleteUser(@Param("unionId") String unionId);
     public void insertUserInfo(UserInfo userInfo);
 }

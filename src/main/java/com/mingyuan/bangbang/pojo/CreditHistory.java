@@ -1,10 +1,15 @@
 package com.mingyuan.bangbang.pojo;
 
-public class CreditHistory {
-    int o_id;
-    int c_change;
-    int c_reason;
+import java.sql.Time;
 
+public class CreditHistory {
+
+    int o_id;
+    int chCreditChange;
+    String chReason;
+    int chId;
+    Time chTime;
+    String unionid;
     public int getO_id() {
         return o_id;
     }
@@ -13,19 +18,43 @@ public class CreditHistory {
         this.o_id = o_id;
     }
 
-    public int getC_change() {
-        return c_change;
+    public int getChCreditChange() {
+        return chCreditChange;
     }
 
-    public void setC_change(int c_change) {
-        this.c_change = c_change;
+    public void setChCreditChange(int chCreditChange) {
+        this.chCreditChange = chCreditChange;
     }
 
-    public int getC_reason() {
-        return c_reason;
+    public String getChReason() {
+        return chReason;
     }
 
-    public void setC_reason(int c_reason) {
-        this.c_reason = c_reason;
+    public void setChReason(String chReason) {
+        this.chReason = chReason;
+    }
+
+    public int getChId() {
+        return chId;
+    }
+
+    public void setChId(int chId) {
+        this.chId = chId;
+    }
+
+    public Time getChTime() {
+        return chTime;
+    }
+
+    public void setChTime(Time chTime) {
+        this.chTime = chTime;
+    }
+
+    public String getUnionid() {
+        return unionid;
+    }
+
+    public void setUnionid(String unionid) {
+        this.unionid = unionid;
     }
 }

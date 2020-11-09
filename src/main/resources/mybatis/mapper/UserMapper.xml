@@ -50,5 +50,7 @@
     <select id="getUserInfos" resultType="com.mingyuan.bangbang.pojo.UserInfo">
         SELECT * FROM user_info;
     </select>
-    <select id="getUserInfo" resultType="com.mingyuan.bangbang.pojo.UserInfo"></select>
+    <select id="getUserInfo" resultType="com.mingyuan.bangbang.pojo.UserInfo">
+        SELECT * FROM user_info where openid = #{unionId};
+    </select>
 </mapper>
