@@ -14,7 +14,7 @@
 <mapper namespace="com.mingyuan.bangbang.mapper.UserMapper">
     <insert id="insertUserInfo">
         insert into user_info(openid, sessionkey, unionid, u_name, u_studentnum, u_identify, u_credit, u_phone)
-        values(#{oppenid},#{sessionkey},#{unionid},#{uName},#{uStudentnum},#{uIdentify},#{uCredit},#{uPhone})
+        values(#{openid},#{sessionkey},#{unionid},#{uName},#{uStudentnum},#{uIdentify},#{uCredit},#{uPhone})
     </insert>
     <update id="updateUser" parameterType="com.mingyuan.bangbang.pojo.UserInfo">
         update user_info set

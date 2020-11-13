@@ -87,4 +87,13 @@ public class UserInfo {
                 ", u_phone=" + uPhone +
                 '}';
     }
+
+
+    public static UserInfo getTestInstance(){
+        UserInfo userInfo = new UserInfo();
+        userInfo.setSessionkey("sessionkey");
+        userInfo.setOpenid("oppenid_test");
+        userInfo.setUnionid("unionid");
+        return userInfo;
+    }
 }

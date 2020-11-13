@@ -2,8 +2,10 @@ package com.mingyuan.bangbang;
 
 import com.mingyuan.bangbang.mapper.CreditHistoryMapper;
 import com.mingyuan.bangbang.mapper.OrderMapper;
+import com.mingyuan.bangbang.mapper.UserMapper;
 import com.mingyuan.bangbang.pojo.CreditHistory;
 import com.mingyuan.bangbang.pojo.OrderInfo;
+import com.mingyuan.bangbang.pojo.UserInfo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -17,14 +19,21 @@ import javax.annotation.Resource;
 @EnableAutoConfiguration
 public class TestMapper {
     @Resource
+    UserMapper userMapper;
+    @Resource
     OrderMapper orderMapper;
     @Resource
     CreditHistoryMapper creditHistoryMapper;
 
     @Test
     public void testInsert(){
-        OrderInfo orderInfo = OrderInfo.getTestInstance();
-        orderMapper.insertOrderInfo(orderInfo);
+        UserInfo userInfo;
+        userInfo = new UserInfo();
+        userInfo.setUnionid("unionid");
+        userInfo.setOpenid("oppenid");
+        userInfo.setSessionkey("session_key");
+        userMapper.insertUserInfo(userInfo);
+
     }
     @Test
     public void testUpdate(){

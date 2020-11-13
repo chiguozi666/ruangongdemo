@@ -28,11 +28,21 @@ spring:
     # - classpath:sql/department.sql
     #- classpath:sql/employee.sql
     #initialization-mode: always
+  redis:
+    host: 8.129.180.36
+    port: 6379
+    jedis:
+      pool:
+        max-active: 18
+        max-idle: 18
+        max-wait: -1ms
+        min-idle: 10
 mybatis:
   # 指定全局配置文件位置
   config-location: classpath:mybatis/mybatis-config.xml
   # 指定sql映射文件位置
   mapper-locations: classpath:mybatis/mapper/*.xml
 wx:
-  appid: wxb5b61ffbb9f4081f
-  appsecret: 825881f52f16a4c626b304670ee79330
+  appid: wx6ff5b832931db341
+  appsecret: ff719724d9442d96dc37df611c0c5ffe
+
