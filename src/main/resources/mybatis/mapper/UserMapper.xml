@@ -37,7 +37,24 @@
             u_credit=#{userInfo.uCredit},
         </if>
         <if test="userInfo.uPhone!=null">
-            u_credit =#{userInfo.uPhone},
+            u_phone =#{userInfo.uPhone},
+        </if>
+        unionid=#{userInfo.unionid}
+        where unionid=#{userInfo.unionid};
+    </update>
+    <update id="updateSmallUser">
+        update user_info set
+        <if test="userInfo.uName != null">
+            u_name=#{userInfo.uName},
+        </if>
+        <if test="userInfo.uStudentnum!=null">
+            u_studentnum=#{userInfo.uStudentnum},
+        </if>
+        <if test="userInfo.uIdentify!=null">
+            u_identify=#{userInfo.uIdentify},
+        </if>
+        <if test="userInfo.uPhone!=null">
+            u_phone =#{userInfo.uPhone},
         </if>
         unionid=#{userInfo.unionid}
         where unionid=#{userInfo.unionid};
@@ -51,6 +68,6 @@
         SELECT * FROM user_info;
     </select>
     <select id="getUserInfo" resultType="com.mingyuan.bangbang.pojo.UserInfo">
-        SELECT * FROM user_info where openid = #{unionId};
+        SELECT * FROM user_info where unionid = #{unionId};
     </select>
 </mapper>

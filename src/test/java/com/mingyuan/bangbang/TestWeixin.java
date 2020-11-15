@@ -2,8 +2,7 @@ package com.mingyuan.bangbang;
 
 import com.mingyuan.bangbang.config.WeixinConfig;
 import com.mingyuan.bangbang.pojo.HttpClientVo;
-import com.mingyuan.bangbang.service.LoginService;
-import com.mingyuan.bangbang.service.impl.LoginServiceImpl;
+import com.mingyuan.bangbang.service.UserService;
 import com.mingyuan.bangbang.util.HttpClientUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,7 +21,7 @@ public class TestWeixin {
     @Autowired
     public WeixinConfig weixinConfig;
     @Autowired
-    public LoginService loginServiceImpl;
+    public UserService loginServiceImpl;
     @Test
     public void testWeixinConfig(){
         System.out.println(weixinConfig);

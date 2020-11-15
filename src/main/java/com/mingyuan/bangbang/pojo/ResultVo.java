@@ -44,4 +44,13 @@ public class ResultVo {
     public String getMsg() {
         return msg;
     }
+
+    @Override
+    public String toString() {
+        return "ResultVo{" +
+                "code='" + code + '\'' +
+                ", data=" + data +
+                ", msg='" + msg + '\'' +
+                '}';
+    }
 }

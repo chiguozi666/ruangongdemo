@@ -46,3 +46,9 @@ wx:
   appid: wx6ff5b832931db341
   appsecret: ff719724d9442d96dc37df611c0c5ffe
 
+# pagehelper
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql

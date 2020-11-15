@@ -19,7 +19,14 @@ public class TokenUtil {
         System.out.println(token);
         return token;
     }
-
+    public static String getUnionId(String token){
+        String s [] = token.split("\\.");
+        if(s.length!=3){
+            System.out.println("token错误");
+            return null;
+        }
+        return token.split("\\.")[1];
+    }
     public static void main(String[] args) {
         String s= createToken("","123","");
         System.out.println(s);

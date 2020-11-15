@@ -8,7 +8,7 @@ public class UserInfo {
     String uStudentnum;
     String uIdentify;
     int uCredit;
-    int uPhone;
+    String uPhone;
 
     public String getOpenid() {
         return openid;
@@ -66,11 +66,11 @@ public class UserInfo {
         this.uCredit = uCredit;
     }
 
-    public int getuPhone() {
+    public String getuPhone() {
         return uPhone;
     }
 
-    public void setuPhone(int uPhone) {
+    public void setuPhone(String uPhone) {
         this.uPhone = uPhone;
     }
 

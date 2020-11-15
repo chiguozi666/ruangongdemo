@@ -62,4 +62,19 @@ public class TestMapper {
         creditHistoryMapper.updateCreditHistory(creditHistory);
         System.out.println(creditHistoryMapper.getCreditHistories());
     }
+    @Test
+    public void testInsertOrder(){
+        for(int i = 0;i<20;i++){
+            OrderInfo orderInfo = OrderInfo.getTestInstance();
+            orderInfo.setoId(i+5);
+            if(i%2==0){
+                orderInfo.setReceiveUserid("chiguozi");
+                orderInfo.setPublishUserid("unionid");
+            }else {
+                orderInfo.setReceiveUserid("unionid");
+                orderInfo.setPublishUserid("chiguozi");
+            }
+            orderMapper.insertOrderInfo(orderInfo);
+        }
+    }
 }
