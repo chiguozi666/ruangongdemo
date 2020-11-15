@@ -29,7 +29,7 @@ public class TestMapper {
     public void testInsert(){
         UserInfo userInfo;
         userInfo = new UserInfo();
-        userInfo.setUnionid("unionid");
+        userInfo.setUnionid("uhonguouo");
         userInfo.setOpenid("oppenid");
         userInfo.setSessionkey("session_key");
         userMapper.insertUserInfo(userInfo);
@@ -64,17 +64,8 @@ public class TestMapper {
     }
     @Test
     public void testInsertOrder(){
-        for(int i = 0;i<20;i++){
             OrderInfo orderInfo = OrderInfo.getTestInstance();
-            orderInfo.setoId(i+5);
-            if(i%2==0){
-                orderInfo.setReceiveUserid("chiguozi");
-                orderInfo.setPublishUserid("unionid");
-            }else {
-                orderInfo.setReceiveUserid("unionid");
-                orderInfo.setPublishUserid("chiguozi");
-            }
-            orderMapper.insertOrderInfo(orderInfo);
-        }
+            orderMapper.publishOrder(orderInfo);
+
     }
 }

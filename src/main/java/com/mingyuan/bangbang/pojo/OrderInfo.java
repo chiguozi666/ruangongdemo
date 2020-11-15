@@ -1,9 +1,14 @@
 package com.mingyuan.bangbang.pojo;
 
 import java.math.BigDecimal;
-import java.sql.Time;
 
 public class OrderInfo {
+    public static final int START_STATE = 100;
+    public static final int START_OVER_ACCEPT_TIME_STATE = 101;
+    public static final int ACCEPT_RUNING_STATE = 102;
+    public static final int ACCEPT_BUT_OVERTIME_STATE = 103;
+    public static final int FINISH_BUT_OVERTIME_STATE= 104;
+    public static final int FINISH_NORMAL_STATE = 105;
     private int oId;
     private String publishUserid;
     private String receiveUserid;
@@ -11,27 +16,36 @@ public class OrderInfo {
     private String oContent;
     private String oPhotourl;
     private BigDecimal oMoney;
-    private Time oEndtime;
-    private Time oFintime;
-    private Time oRequiretime;
+    private String oPublishtime;
+    private String oAccepttime;
+    private String oEndtime;
+    private String oFintime;
+    private String oRequiretime;
     private String locate;
+    private int oState;
     public static OrderInfo getTestInstance(){
         OrderInfo orderInfo = new OrderInfo();
         orderInfo.setPublishUserid("发送者id");
         orderInfo.setReceiveUserid("接收者id");
         orderInfo.setoTitle("我是标题");
         orderInfo.setoContent("我是内容");
-        orderInfo.setoPhotourl("www.xxxx.com");
+        orderInfo.setoPhotourl("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605456550520&di=53a0091a6b5050bc9bcc276bec0214b7&imgtype=0&src=http%3A%2F%2Fa1.att.hudong.com%2F05%2F00%2F01300000194285122188000535877.jpg");
         orderInfo.setoMoney(new BigDecimal(5.20));
-        orderInfo.setoEndtime(new Time(System.currentTimeMillis()));
-        orderInfo.setoFintime(new Time(System.currentTimeMillis()));
-        orderInfo.setoRequiretime(new Time(System.currentTimeMillis()));
+        orderInfo.setoPublishtime(String.valueOf(System.currentTimeMillis()));
+        orderInfo.setoAccepttime(String.valueOf(System.currentTimeMillis()));
+        orderInfo.setoEndtime(String.valueOf(System.currentTimeMillis()));
+        orderInfo.setoFintime(String.valueOf(System.currentTimeMillis()));
+        orderInfo.setoRequiretime(String.valueOf(System.currentTimeMillis()));
         orderInfo.setLocate("二饭");
+        orderInfo.setoState(OrderInfo.START_STATE);
         return orderInfo;
     }
     public OrderInfo(){}
 
-    public OrderInfo(int oId, String publishUserid, String receiveUserid, String oTitle, String oContent, String oPhotourl, BigDecimal oMoney, Time oEndtime, Time oFintime, Time oRequiretime, String locate) {
+    public OrderInfo(int oId, String publishUserid, String receiveUserid,
+                     String oTitle, String oContent, String oPhotourl,
+                     BigDecimal oMoney, String oEndtime, String oFintime, String oRequiretime,
+                     String locate, int oState) {
         this.oId = oId;
         this.publishUserid = publishUserid;
         this.receiveUserid = receiveUserid;
@@ -43,6 +57,15 @@ public class OrderInfo {
         this.oFintime = oFintime;
         this.oRequiretime = oRequiretime;
         this.locate = locate;
+        this.oState = oState;
+    }
+
+    public String getoPublishtime() {
+        return oPublishtime;
+    }
+
+    public void setoPublishtime(String oPublishtime) {
+        this.oPublishtime = oPublishtime;
     }
 
     public int getoId() {
@@ -101,27 +124,27 @@ public class OrderInfo {
         this.oMoney = oMoney;
     }
 
-    public Time getoEndtime() {
+    public String getoEndtime() {
         return oEndtime;
     }
 
-    public void setoEndtime(Time oEndtime) {
+    public void setoEndtime(String oEndtime) {
         this.oEndtime = oEndtime;
     }
 
-    public Time getoFintime() {
+    public String getoFintime() {
         return oFintime;
     }
 
-    public void setoFintime(Time oFintime) {
+    public void setoFintime(String oFintime) {
         this.oFintime = oFintime;
     }
 
-    public Time getoRequiretime() {
+    public String getoRequiretime() {
         return oRequiretime;
     }
 
-    public void setoRequiretime(Time oRequiretime) {
+    public void setoRequiretime(String oRequiretime) {
         this.oRequiretime = oRequiretime;
     }
 
@@ -131,6 +154,22 @@ public class OrderInfo {
 
     public void setLocate(String locate) {
         this.locate = locate;
+    }
+
+    public int getoState() {
+        return oState;
+    }
+
+    public void setoState(int oState) {
+        this.oState = oState;
+    }
+
+    public String getoAccepttime() {
+        return oAccepttime;
+    }
+
+    public void setoAccepttime(String oAccepttime) {
+        this.oAccepttime = oAccepttime;
     }
 
     @Override
@@ -143,10 +182,13 @@ public class OrderInfo {
                 ", oContent='" + oContent + '\'' +
                 ", oPhotourl='" + oPhotourl + '\'' +
                 ", oMoney=" + oMoney +
-                ", oEndtime=" + oEndtime +
-                ", oFintime=" + oFintime +
-                ", oRequiretime=" + oRequiretime +
+                ", oPublishtime='" + oPublishtime + '\'' +
+                ", oAccepttime='" + oAccepttime + '\'' +
+                ", oEndtime='" + oEndtime + '\'' +
+                ", oFintime='" + oFintime + '\'' +
+                ", oRequiretime='" + oRequiretime + '\'' +
                 ", locate='" + locate + '\'' +
+                ", oState=" + oState +
                 '}';
     }
 }
