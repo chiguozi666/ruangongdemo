@@ -59,6 +59,7 @@
         unionid=#{userInfo.unionid}
         where unionid=#{userInfo.unionid};
     </update>
+
     <delete id="deleteUser">
         delete from user_info where unionid = #{0};
     </delete>

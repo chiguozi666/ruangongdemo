@@ -36,11 +36,14 @@ public class RedisUtil {
         valueOperations.set(PROJECT_NAME+USER_PREFIX+TOKEN_VAL+token, unionid,Duration.ofSeconds(OPEN_ID_SECONDES));
     }
 
-    public static String getToken(ValueOperations<String,String> valueOperations,String token){
+    public static String getUnionId(ValueOperations<String,String> valueOperations, String token){
         if (valueOperations == null || token == null){
+            System.out.println("valueOperations"+"是空的");
             return null;
         }
-        return valueOperations.get(PROJECT_NAME+USER_PREFIX+TOKEN_VAL + token);
+
+        String unionid = valueOperations.get(PROJECT_NAME+USER_PREFIX+TOKEN_VAL + token);
+        return unionid;
     }
 
 

@@ -8,10 +8,13 @@ import com.mingyuan.bangbang.mapper.UserMapper;
 import com.mingyuan.bangbang.pojo.OrderInfo;
 import com.mingyuan.bangbang.pojo.OrderVo;
 import com.mingyuan.bangbang.pojo.ResultVo;
+import com.mingyuan.bangbang.service.CreditService;
 import com.mingyuan.bangbang.service.OrderService;
+import com.mingyuan.bangbang.util.CreditUtil;
 import com.mingyuan.bangbang.util.ResultUtil;
 import com.mingyuan.bangbang.util.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -24,6 +27,10 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     UserMapper userMapper;
+    @Autowired
+    ValueOperations valueOperations;
+    @Autowired
+    CreditService creditServiceImpl;
     @Override
     public ResultVo getOrderInfos(int pageNum,int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
@@ -33,7 +40,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public ResultVo getMyPublishOrders(int pageNum, int pageSize, String token) {
-        String unionid = TokenUtil.getUnionId(token);
+        String unionid = TokenUtil.getUnionId(valueOperations,token);
         if(unionid==null){
             return ResultUtil.errorWithMsg("token错误，或者是用户已经被删除");
         }
@@ -44,7 +51,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public ResultVo getMyReceiveOrders(int pageNum, int pageSize, String token) {
-        String unionid = TokenUtil.getUnionId(token);
+        String unionid = TokenUtil.getUnionId(valueOperations,token);
         if(unionid==null){
             return ResultUtil.errorWithMsg("token错误，或者是用户已经被删除");
         }
@@ -56,7 +63,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public ResultVo publishOrder(OrderVo orderVo, String token) {
         OrderInfo orderInfo = new OrderInfo();
-        String unionid = TokenUtil.getUnionId(token);
+        String unionid = TokenUtil.getUnionId(valueOperations,token);
         orderInfo.setPublishUserid(unionid);
         orderInfo.setReceiveUserid(null);
         //参数初始化
@@ -68,12 +75,16 @@ public class OrderServiceImpl implements OrderService {
         //时间初始化
         long curtime = System.currentTimeMillis();
         System.out.println("orderServiceImpl当前时间:" +curtime);
-        if(Long.valueOf(orderVo.getO_requiretime())<curtime){
-            return ResultUtil.errorWithMsg("你的截止时间太早啦");
-        }
-        if(Long.valueOf(orderVo.getO_endtime())<curtime
-                ||Long.valueOf(orderVo.getO_requiretime())<Long.valueOf(orderVo.getO_endtime())){
-            return ResultUtil.errorWithMsg("你的截止时间太早啦,或者是截止时间大于任务完成时间");
+        try{
+            if(Long.valueOf(orderVo.getO_requiretime())<curtime){
+                return ResultUtil.errorWithMsg("你的截止时间太早啦");
+            }
+            if(Long.valueOf(orderVo.getO_endtime())<curtime
+                    ||Long.valueOf(orderVo.getO_requiretime())<Long.valueOf(orderVo.getO_endtime())){
+                return ResultUtil.errorWithMsg("你的截止时间太早啦,或者是截止时间大于任务完成时间");
+            }
+        }catch (NumberFormatException e){
+            return ResultUtil.errorWithMsg("输入的时间格式错误");
         }
         orderInfo.setoPublishtime(String.valueOf(System.currentTimeMillis()));
         orderInfo.setoRequiretime(orderVo.getO_requiretime());
@@ -89,7 +100,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public ResultVo pCancelOrder(int orderId, String token) {
-        String unionid = TokenUtil.getUnionId(token);
+        String unionid = TokenUtil.getUnionId(valueOperations,token);
         OrderInfo orderInfo = orderMapper.getOrderInfo(orderId);
         if(orderInfo==null)return ResultUtil.errorWithMsg("没有此订单");
         //订单号不匹配
@@ -106,7 +117,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public ResultVo rCancelOrder(String token, int orderID) {
-        String unionid = TokenUtil.getUnionId(token);
+        String unionid = TokenUtil.getUnionId(valueOperations,token);
         OrderInfo orderInfo = orderMapper.getOrderInfo(orderID);
         //空
         if(orderInfo==null||orderInfo.getReceiveUserid()==null)return ResultUtil.errorWithMsg("订单信息错误");
@@ -127,7 +138,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public ResultVo updateOrder(OrderVo orderVo, String token) {
-        String unionId = TokenUtil.getUnionId(token);
+        String unionId = TokenUtil.getUnionId(valueOperations,token);
         if(unionId==null){
             return ResultUtil.errorWithMsg("tocken错误");
         }
@@ -167,7 +178,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public ResultVo receiveOrder(String token, int orderID) {
-        String unionId = TokenUtil.getUnionId(token);
+        String unionId = TokenUtil.getUnionId(valueOperations,token);
         OrderInfo orderInfo = orderMapper.getOrderInfo(orderID);
         if(orderInfo==null){
             return ResultUtil.errorWithMsg("订单信息错误");
@@ -188,7 +199,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public ResultVo completeOrder(String token, int orderId) {
-        String unionId = TokenUtil.getUnionId(token);
+        String unionId = TokenUtil.getUnionId(valueOperations,token);
         OrderInfo orderInfo = orderMapper.getOrderInfo(orderId);
         if(orderInfo==null){
             return ResultUtil.errorWithMsg("订单信息错误");
@@ -205,11 +216,13 @@ public class OrderServiceImpl implements OrderService {
             // TODO: 2020/11/16 信用的修改
             orderInfo.setoState(OrderInfo.FINISH_BUT_OVERTIME_STATE);
             orderMapper.updateOrder(orderInfo);
+            creditServiceImpl.createCredit(CreditUtil.OverTime_reduce_10(orderId,unionId));
             return ResultUtil.successWitMsg("提交成功，但是你这次超时了");
         }else {
             orderInfo.setoState(OrderInfo.FINISH_NORMAL_STATE);
             orderMapper.updateOrder(orderInfo);
-            return ResultUtil.successWitMsg("提交成功");
+            creditServiceImpl.createCredit(CreditUtil.Finish_plus_1(orderId,unionId));
+            return ResultUtil.successWitMsg("提交成功,信用++");
         }
 
     }

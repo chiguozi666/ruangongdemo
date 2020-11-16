@@ -45,8 +45,8 @@ public class OrderController {
                                 @RequestHeader(required = true) String token) {
         return orderServiceImpl.publishOrder(orderVo, token);
     }
-    @ApiParam(value = "用户接收任务")
-    @PostMapping(value = "/accept")
+    @ApiParam(value = "用户接收任务",name = "用户接受任务")
+    @PostMapping(value = "/receive")
     public ResultVo receiveOrder(@ApiParam(name="订单号",value="orderId",required=true)@RequestBody int orderId,
                                 @RequestHeader(required = true) String token) {
         return orderServiceImpl.receiveOrder(token,orderId);

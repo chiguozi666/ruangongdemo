@@ -35,4 +35,10 @@ public class UserController {
         System.out.println(token);
         return resultVo;
     }
+    @PostMapping(value = "/testjs_code")
+    public ResultVo test(@ApiParam(name="传入对象",value="传入json格式",required=true)@RequestBody UserVo userVo){
+        System.out.println(userVo.toString());
+        //ResultVo resultVo = userServiceImpl.login(userVo.getUnionid(),userVo.getJs_code());
+        return null;
+    }
 }
