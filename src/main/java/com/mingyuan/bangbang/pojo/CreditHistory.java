@@ -8,7 +8,7 @@ public class CreditHistory {
     int chCreditChange;
     String chReason;
     int chId;
-    Time chTime;
+    String chTime;
     String unionid;
     public CreditHistory(){}
     public int getoId() {
@@ -43,11 +43,11 @@ public class CreditHistory {
         this.chId = chId;
     }
 
-    public Time getChTime() {
+    public String getChTime() {
         return chTime;
     }
 
-    public void setChTime(Time chTime) {
+    public void setChTime(String chTime) {
         this.chTime = chTime;
     }
 
@@ -60,7 +60,7 @@ public class CreditHistory {
     }
 
 
-    public CreditHistory(int o_id, int chCreditChange, String chReason, int chId, Time chTime, String unionid) {
+    public CreditHistory(int o_id, int chCreditChange, String chReason, int chId, String chTime, String unionid) {
         this.oId = o_id;
         this.chCreditChange = chCreditChange;
         this.chReason = chReason;
@@ -74,7 +74,7 @@ public class CreditHistory {
         creditHistory.setoId(1344);
         creditHistory.setChCreditChange(-10);
         creditHistory.setChReason("我是原因");
-        creditHistory.setChTime(new Time(System.currentTimeMillis()));
+        creditHistory.setChTime(String.valueOf(new Time(System.currentTimeMillis())));
         return creditHistory;
     }
 }

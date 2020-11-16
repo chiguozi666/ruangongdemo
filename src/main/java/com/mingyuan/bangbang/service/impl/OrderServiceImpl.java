@@ -193,7 +193,7 @@ public class OrderServiceImpl implements OrderService {
         if(orderInfo==null){
             return ResultUtil.errorWithMsg("订单信息错误");
         }
-        if(orderInfo.getReceiveUserid()!=unionId){
+        if(!orderInfo.getReceiveUserid().equals(unionId)){
             return ResultUtil.errorWithMsg("token信息错误");
         }
         Long time = System.currentTimeMillis();

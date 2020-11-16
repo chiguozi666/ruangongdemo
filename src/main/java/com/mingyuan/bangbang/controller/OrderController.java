@@ -41,9 +41,33 @@ public class OrderController {
     }
     @ApiParam(value = "发布任务")
     @PostMapping(value = "/publish")
-    public ResultVo CommitOrder(@ApiParam(name="传入对象",value="传入json格式",required=true)@RequestBody OrderVo orderVo,
+    public ResultVo publishOrder(@ApiParam(name="传入对象",value="orderInfo",required=true)@RequestBody OrderVo orderVo,
                                 @RequestHeader(required = true) String token) {
         return orderServiceImpl.publishOrder(orderVo, token);
+    }
+    @ApiParam(value = "用户接收任务")
+    @PostMapping(value = "/accept")
+    public ResultVo receiveOrder(@ApiParam(name="订单号",value="orderId",required=true)@RequestBody int orderId,
+                                @RequestHeader(required = true) String token) {
+        return orderServiceImpl.receiveOrder(token,orderId);
+    }
+    @ApiParam(value = "接受者完成任务")
+    @PostMapping(value = "/fin")
+    public ResultVo finOrder(@ApiParam(name="订单号",value="orderId",required=true)@RequestBody int orderId,
+                                 @RequestHeader(required = true) String token) {
+        return orderServiceImpl.completeOrder(token,orderId);
+    }
+    @ApiParam(value = "发布者取消订单")
+    @PostMapping(value = "/pCancelOrder")
+    public ResultVo pCancelOrder(@ApiParam(name="订单号",value="orderId",required=true)@RequestBody int orderId,
+                             @RequestHeader(required = true) String token) {
+        return orderServiceImpl.pCancelOrder(orderId,token);
+    }
+    @ApiParam(value = "接收者取消订单")
+    @PostMapping(value = "/rCancelOrder")
+    public ResultVo rCancelOrder(@ApiParam(name="订单号",value="orderId",required=true)@RequestBody int orderId,
+                                 @RequestHeader(required = true) String token) {
+        return orderServiceImpl.rCancelOrder(token,orderId);
     }
 
 }

@@ -10,7 +10,7 @@ import java.util.List;
 public interface CreditHistoryMapper {
     public List<CreditHistory> getCreditHistoriesByUnionid(int unionid);
     public List<CreditHistory> getCreditHistories();
-    public CreditHistoryMapper getCreditHistory(@Param("chId") int chId);
+    public CreditHistory getCreditHistory(@Param("chId") int chId);
     public int updateCreditHistory(@Param("creditHistory") CreditHistory creditHistory);
     public void deleteCreditHistory(@Param("creditHistory")int chId);
     public void insertCreditHistory(CreditHistory creditHistory);
